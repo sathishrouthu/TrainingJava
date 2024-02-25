@@ -31,8 +31,6 @@ const AddEmployeeForm = () => {
     let wellnessLeaves = 5;
     let carryForwardedLeaves = 0;
     if (currentMonth < 6) {
-      // Months are zero-indexed, so July is month 6
-      // Casual leaves will be calculated as July - the current month
       casualLeaves = 6 - currentMonth;
     } else {
       // After July, casual leaves will be calculated as December - the current month - July
