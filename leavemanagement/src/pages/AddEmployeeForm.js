@@ -24,6 +24,32 @@ const AddEmployeeForm = () => {
     { id: 2, name: "ram" },
   ];
 
+  function loadLeaveBalance() {
+    const currentMonth = 4; //new Date().getMonth();
+    let casualLeaves;
+    let privilegeLeaves;
+    let wellnessLeaves = 5;
+    let carryForwardedLeaves = 0;
+    if (currentMonth < 6) {
+      // Months are zero-indexed, so July is month 6
+      // Casual leaves will be calculated as July - the current month
+      casualLeaves = 6 - currentMonth;
+    } else {
+      // After July, casual leaves will be calculated as December - the current month - July
+      casualLeaves = 6 - (currentMonth - 6);
+    }
+
+    // Privilege leaves will be 1 if it is an even month, otherwise 2
+    privilegeLeaves = currentMonth % 2 === 0 ? 1 : 2;
+
+    return {
+      casualLeaves,
+      privilegeLeaves,
+      wellnessLeaves,
+      carryForwardedLeaves,
+    };
+  }
+  formData.leaveBalance = loadLeaveBalance();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
